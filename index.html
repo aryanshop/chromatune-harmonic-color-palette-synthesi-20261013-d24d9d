@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChromaTune: Harmonic Color Palette Synthesizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="logo">
+      <span class="logo-icon">◌</span>
+      <h1>ChromaTune</h1>
+    </div>
+    <p class="tagline">Synthesize cohesive palettes using musical harmony principles</p>
+  </header>
+
+  <main class="app-container">
+    <section class="controls-panel" aria-label="Palette Generator Controls">
+      <div class="control-group">
+        <label for="rootColor">Root Color (Tonic)</label>
+        <div class="color-input-wrapper">
+          <input type="color" id="rootColor" value="#6366f1" aria-label="Root color picker">
+          <input type="text" id="rootColorText" value="#6366f1" maxlength="7" aria-label="Root color hex code">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label for="harmonyMode">Musical Interval / Harmony</label>
+        <select id="harmonyMode">
+          <option value="major">Major Chord (Triad + Octave)</option>
+          <option value="minor">Minor Chord (Triad + Octave)</option>
+          <option value="pentatonic">Pentatonic Scale (5 Tones)</option>
+          <option value="seventh">Dominant 7th (4 Tones)</option>
+          <option value="augmented">Augmented Chord (Symmetric)</option>
+          <option value="diminished">Diminished Chord (Tense)</option>
+          <option value="cluster">Tone Cluster (Tight Intervals)</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="brightnessShift">Brightness Modulation</label>
+        <input type="range" id="brightnessShift" min="-40" max="40" value="0">
+        <span id="brightnessVal" class="range-val">0%</span>
+      </div>
+
+      <div class="action-buttons">
+        <button id="btnRandomize" class="btn secondary">Randomize Tonic</button>
+        <button id="btnExport" class="btn primary">Export Palette</button>
+      </div>
+    </section>
+
+    <section class="palette-display" id="paletteDisplay" aria-label="Generated Color Palette">
+      <!-- Swatches dynamically injected here -->
+    </section>
+
+    <section class="info-panel">
+      <div class="accessibility-report" id="accessibilityReport">
+        <h3>Accessibility Check</h3>
+        <p>Select swatches to check WCAG contrast compliance against white and black text.</p>
+      </div>
+      <div class="code-preview">
+        <div class="code-header">
+          <h3>Generated CSS Variables</h3>
+          <button id="btnCopyCss" class="btn-text">Copy CSS</button>
+        </div>
+        <pre><code id="cssCodeOutput">:root {
+  --color-1: #6366f1;
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="exportModal" aria-hidden="true">
+    <div class="modal-content">
+      <h2>Export Palette</h2>
+      <div class="export-tabs">
+        <button class="tab-btn active" data-target="exportCss">CSS</button>
+        <button class="tab-btn" data-target="exportJson">JSON</button>
+        <button class="tab-btn" data-target="exportTailwind">Tailwind</button>
+      </div>
+      <textarea id="exportTextarea" readonly aria-label="Exported code"></textarea>
+      <div class="modal-actions">
+        <button id="btnCloseModal" class="btn secondary">Close</button>
+        <button id="btnCopyModal" class="btn primary">Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" aria-live="polite">Copied to clipboard!</div>
+
+  <footer>
+    <p>ChromaTune &mdash; Static Color & Music Experiment. No data leaves your browser.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
